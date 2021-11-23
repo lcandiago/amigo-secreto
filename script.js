@@ -20,7 +20,6 @@ const sortFriends = () => {
   possibleFriends = [...friends]
 
   possibleFriends.forEach(friend => {
-    console.log({friend, possibleFriends})
     const randomFriend = getRandomFriendAndRemove(friend)
 
     resultElement.innerHTML += `<tr><td>${friend}</td><td>https://secretoamigo.com.br?f=${window.btoa(friend + '.' + randomFriend)}</td></tr>`
