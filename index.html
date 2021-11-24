@@ -25,20 +25,36 @@
 <body>
   <div class="container">
     <h1>Amigo Secreto Online - Natal 🎅</h1>
-    <h2>Cadastre os participantes</h2>
+
+    <section id="form-section">
+      <h2>Cadastre os participantes</h2>
+    
+      <form id="sort-form" class="mb-3">
+        <div class="mb-3">
+          <label for="participantes" class="form-label">Participantes (separados por virgula):</label>
+          <textarea name="participantes" id="participantes" class="form-control"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Sortear</button>
+      </form>
+    </section>
   
-    <form id="sort-form" class="mb-3">
-      <div class="mb-3">
-        <label for="participantes" class="form-label">Participantes (separados por virgula):</label>
-        <textarea name="participantes" id="participantes" class="form-control"></textarea>
-      </div>
-      
-      <button type="submit" class="btn btn-primary">Sortear</button>
-    </form>
-  
-    <table class="table">
-      <tbody id="resultado"></tbody>
-    </table>
+    <section id="result-section" class="d-none">
+      <h2>Resultado do Sorteio</h2>
+      <p>Copie e envie o link do respectivo participante</p>
+
+      <table class="table">
+        <tbody id="resultado"></tbody>
+      </table>
+    </section>
+
+    <section id="secret-section" class="d-none">
+      <h2>Olá, <span id="current-person"></span></h2>
+      <p>Descubra o seu amigo secreto:</p>
+
+      <button id="reveal-button" class="btn btn-primary mb-3">Revelar</button>
+      <p id="secret-friend"></p>
+    </section>
   </div>
   <script src="./script.js"></script>
 </body>
