@@ -24,12 +24,14 @@ if (friendParam) {
   let possibleFriends = []
 
   const getRandomFriendAndRemove = (exceptFriend) => {
-    const randomNumber = Math.floor(Math.random() * friends.length)
-    const randomFriend = friends[randomNumber]
-    if (randomFriend === exceptFriend) {
-      return getRandomFriendAndRemove(exceptFriend)
-    }
-    friends.splice(randomNumber, 1)
+    const exceptFriendIndex = friends.indexOf(exceptFriend)
+    const currentPossibleFriends = [...friends].splice(exceptFriendIndex, 1)
+    const randomNumber = Math.floor(Math.random() * currentPossibleFriends.length)
+
+    const randomFriend = currentPossibleFriends[randomNumber]
+    const randomFriendIndex = friends.indexOf(randomFriend)
+    
+    friends.splice(randomFriendIndex, 1)
     return randomFriend
   }
 
