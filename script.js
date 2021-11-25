@@ -21,14 +21,12 @@ if (friendParam) {
   })
 } else {
   let friends = []
-  let possibleFriends = []
 
   const getRandomFriendAndRemove = (exceptFriend) => {
-    const exceptFriendIndex = friends.indexOf(exceptFriend)
-    const currentPossibleFriends = [...friends].splice(exceptFriendIndex, 1)
-    const randomNumber = Math.floor(Math.random() * currentPossibleFriends.length)
+    const possibleFriends = friends.filter(friend => friend !== exceptFriend)
+    const randomNumber = Math.floor(Math.random() * possibleFriends.length)
 
-    const randomFriend = currentPossibleFriends[randomNumber]
+    const randomFriend = possibleFriends[randomNumber]
     const randomFriendIndex = friends.indexOf(randomFriend)
     
     friends.splice(randomFriendIndex, 1)
@@ -42,13 +40,11 @@ if (friendParam) {
 
   const sortFriends = () => {
     friends = friendsElement.value.split(',')
-    possibleFriends = [...friends]
+    const possibleFriends = [...friends]
+    
+    const chosenFriends = possibleFriends.map(getRandomFriendAndRemove)
 
-    possibleFriends.forEach(friend => {
-      const randomFriend = getRandomFriendAndRemove(friend)
-
-      resultElement.innerHTML += `<tr><td>${friend}</td><td>https://secretoamigo.com.br?f=${window.btoa(friend + ':' + randomFriend)}</td></tr>`
-    })
+    return {possibleFriends, chosenFriends}
   }
 
   sortFormElement.addEventListener('submit', (event) => {
@@ -56,7 +52,20 @@ if (friendParam) {
 
     formSectionElement.classList.add('d-none')
     resultSectionElement.classList.remove('d-none')
+    
+    let lastChosenFriend = null
+    let wPossibleFriends = null
+    let wChosenFriends = null
+    
+    while(!lastChosenFriend) {
+      const { possibleFriends, chosenFriends } = sortFriends()
+      wPossibleFriends = possibleFriends
+      wChosenFriends = chosenFriends
+      lastChosenFriend = chosenFriends[chosenFriends.length - 1]
+    }
 
-    sortFriends()
+    wPossibleFriends.forEach((friend, index) => {
+      resultElement.innerHTML += `<tr><td>${friend}</td><td>${wChosenFriends[index]}</td></tr>`    
+    })
   })
 }
