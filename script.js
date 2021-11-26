@@ -65,7 +65,7 @@ if (friendParam) {
     }
 
     wPossibleFriends.forEach((friend, index) => {
-      resultElement.innerHTML += `<tr><td>${friend}</td><td>${wChosenFriends[index]}</td></tr>`    
+      resultElement.innerHTML += `<tr><td>${friend}</td><td>https://secretoamigo.com.br?f=${window.btoa(friend + ':' + randomFriend)}</td></tr>`
     })
   })
 }
